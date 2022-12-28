@@ -8,14 +8,14 @@ dotenv.config();
 const app = express();
 import tasks from "./routes/tasks.js";
 
-const port = 3000;
-
 // middleware
 app.use(express.json());
 
 // routes
 app.use("/api/v1/tasks", tasks);
 app.use(notFound);
+
+const port = process.env.PORT || 3000;
 
 mongoose
   .connect(process.env.MONGO_URL)
