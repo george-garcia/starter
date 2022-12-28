@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import notFound from "./middleware/not-found.js";
 
 dotenv.config();
 
@@ -13,12 +14,8 @@ const port = 3000;
 app.use(express.json());
 
 // routes
-
-app.get("/hello/", (req, res) => {
-  res.send("Task Manager");
-});
-
 app.use("/api/v1/tasks", tasks);
+app.use(notFound);
 
 mongoose
   .connect(process.env.MONGO_URL)
